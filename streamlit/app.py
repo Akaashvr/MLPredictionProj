@@ -193,7 +193,7 @@
 import json
 from pathlib import Path
 from typing import Dict, Any
-
+import os
 import requests
 import streamlit as st
 
@@ -208,7 +208,10 @@ st.set_page_config(page_title="Housing Price Classifier", page_icon="🏠")
 #SCHEMA_PATH = Path("MLProj_v1/data/data_schema.json")
 SCHEMA_PATH = Path("data/data_schema.json")
 
-API_URL = "https://mlpredictionproj.onrender.com"
+# API_URL = "https://mlpredictionproj.onrender.com"
+# PREDICT_URL = f"{API_URL}/predict"
+
+API_URL = os.environ.get("API_URL", "http://localhost:8000")
 PREDICT_URL = f"{API_URL}/predict"
 
 # ------------------------------------------------------------------------------

@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY streamlit/app.py ./app.py
 
 RUN mkdir -p /app/data
-COPY MLProj_v1/data/data_schema.json /app/data/data_schema.json
+COPY data/data_schema.json /app/data/data_schema.json
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
   CMD sh -c 'curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1'
