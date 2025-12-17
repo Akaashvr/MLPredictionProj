@@ -1,29 +1,18 @@
-# streamlit/Dockerfile
 FROM python:3.12-slim
-
 WORKDIR /app
 
-# 0. Install system dependencies (curl for healthcheck)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
     rm -rf /var/lib/apt/lists/*
 
-# 1. Install Python dependencies
-COPY requirements.txt .
+# copy from repo-root context
+COPY streamlit/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 2. Copy Streamlit app
-COPY app.py .
+COPY streamlit/app.py ./app.py
 
-# 3. Ensure data dir exists (will be mounted from host)
 RUN mkdir -p /app/data
 
-EXPOSE 8501
-
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-  CMD curl -f http://localhost:8501/_stcore/health || exit 1
-
-# Render sets $PORT. Use 8501 only as fallback for local runs.
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
   CMD sh -c 'curl -f http://localhost:${PORT:-8501}/_stcore/health || exit 1'
 
