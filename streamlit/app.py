@@ -205,7 +205,8 @@ st.set_page_config(page_title="Housing Price Classifier", page_icon="🏠")
 # ------------------------------------------------------------------------------
 # Paths (Streamlit Cloud safe)
 # ------------------------------------------------------------------------------
-SCHEMA_PATH = Path("MLProj_v1/data/data_schema.json")
+#SCHEMA_PATH = Path("MLProj_v1/data/data_schema.json")
+SCHEMA_PATH = Path("data/data_schema.json")
 
 API_URL = "https://mlpredictionproj.onrender.com"
 PREDICT_URL = f"{API_URL}/predict"
